@@ -22,7 +22,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE)
-    created_by = models.ForeignKey(User, db_constraint=models.CASCADE, related_name='product_creator')
+    created_by = models.ForeignKey(User, db_constraint=models.CASCADE, related_name='product_creator',on_delete=models.CASCADE)
     model = models.CharField(max_length=225)
     creator = models.CharField(max_length=225)
     description = models.TextField(blank=True)
