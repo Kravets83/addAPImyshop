@@ -3,6 +3,11 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 
+class ProductManager(models.Manager):
+    def get_queryset(self):
+        return super(ProductManager, self).get_queryset().filter(is_active=True)
+
+
 class Category(models.Model):
     name = models.CharField(max_length=120, db_index=True)
     slug = models.SlugField(max_length=225, unique=True)
@@ -22,7 +27,7 @@ class Product(models.Model):
     created_by = models.ForeignKey(User, db_constraint=models.CASCADE, related_name='product_creator',
                                    on_delete=models.CASCADE)
     model = models.CharField(max_length=225)
-    creator = models.CharField(max_length=225)
+    creator = models.CharField(max_length=225, default='')
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='images/')
     slug = models.SlugField(max_length=225)
@@ -38,3 +43,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.model
+
+    def get_absolute_url(self):
+        return reverse('store:product_detail', args=[self.slug])
