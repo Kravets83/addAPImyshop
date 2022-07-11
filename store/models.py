@@ -27,7 +27,7 @@ class Product(models.Model):
     created_by = models.ForeignKey(User, db_constraint=models.CASCADE, related_name='product_creator',
                                    on_delete=models.CASCADE)
     model = models.CharField(max_length=225)
-    creator = models.CharField(max_length=225, default='')
+    manufacturer = models.CharField(max_length=225, default='')
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='images/')
     slug = models.SlugField(max_length=225)
