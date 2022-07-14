@@ -12,10 +12,10 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['model', 'manufacturer', 'slug', 'prise', 'in_stock','is_active',
+    list_display = ['model', 'manufacturer', 'slug', 'price', 'in_stock','is_active',
                     'created', 'updated','get_image']
     list_filter = ['in_stock', 'is_active']
-    list_editable = ['prise', 'in_stock', 'is_active']
+    list_editable = ['price', 'in_stock', 'is_active']
     preserve_filters = {'slug': ('model',)}
 
     def get_image(self, obj):

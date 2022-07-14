@@ -31,7 +31,7 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     image = models.ImageField('images/%Y/%m/%d/')
     slug = models.SlugField(max_length=225)
-    prise = models.DecimalField(max_digits=7, decimal_places=2)
+    price = models.DecimalField(max_digits=7, decimal_places=2)
     in_stock = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
     created = models.TimeField(auto_now_add=True)
