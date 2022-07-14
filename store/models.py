@@ -29,7 +29,7 @@ class Product(models.Model):
     model = models.CharField(max_length=225)
     manufacturer = models.CharField(max_length=225, default='')
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField('images/%Y/%m/%d/')
     slug = models.SlugField(max_length=225)
     prise = models.DecimalField(max_digits=7, decimal_places=2)
     in_stock = models.BooleanField(default=True)
