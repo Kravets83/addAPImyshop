@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'store',
+    'basket',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'store.views.categories',
                 'store.context_processors.categories',
-                # 'basket.context_processors.basket',
+                'basket.context_processors.basket',
 
             ],
         },
