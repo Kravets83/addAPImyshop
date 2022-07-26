@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(blank=True)),
                 ('image', models.ImageField(upload_to='images/')),
                 ('slug', models.SlugField(max_length=225)),
-                ('prise', models.DecimalField(decimal_places=2, max_digits=7)),
+                ('price', models.DecimalField(decimal_places=2, max_digits=7)),
                 ('in_stock', models.BooleanField(default=True)),
                 ('is_active', models.BooleanField(default=True)),
                 ('created', models.TimeField(auto_now_add=True)),
