@@ -9,12 +9,17 @@
     <main class="pt-5">
         <div class="row g-3">
             <div class="col-md-5 col-lg-5 order-md-first bg-light">
-                <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ product.image.url }}">
+                <div class="card-body p-1">
+                        <p></p>
+                        <p>  &ensp; </p>
+                        <div class="bg-light"><img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ product.image.url }}"> </div>
+                    </div>
             </div>
+
             <div class="col-md-7 col-lg-7 ps-md-3 ps-lg-5">
                 <h1 class="mb-0 h4">{{ product.model }}</h1>
-                <p><span class="lead">{{ product.manufacturer     }}:</span>    Manufacturer</p>
-                <p>{{ product.description|slice:":355" }}...</p>
+                <p><span class="lead">Manufacturer: {{ product.manufacturer     }}</span></p>
+                <p>{{ product.description }}</p>
                 <div class="border">
                     <div class="col border-bottom">
                         <div class="row p-3">
@@ -42,12 +47,20 @@
                                 </select>
 
                             </div>
-                            <div class="col-6 text-end"><button id = "add-button" value="{{ product.id }}" type="button" class="btn btn-secondary btn-sm">Add to
-                                    basket</button></div>
+
+                                <div class="col-6 text-end"><button id = "add-button" value="{{ product.id }}" type="button" class="btn btn-success fw500"">Add to
+                                    Basket</button>
+                                <p></p>
+                                <button id = "add-button" value="{{ product.id }}" type="button" class="btn btn-light fw500">Add to
+                                    Favorites</button></div>
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
     </main>
 
