@@ -29,9 +29,10 @@ from django.urls import path, include
 import debug_toolbar
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin', admin.site.urls),
     path('', include('store.urls', namespace='store')),
-    path('basket/', include('basket.urls', namespace='basket'))
+    path('basket/', include('basket.urls', namespace='basket')),
+    path('account/', include('account.urls', namespace='account')),
 
 
 ]
