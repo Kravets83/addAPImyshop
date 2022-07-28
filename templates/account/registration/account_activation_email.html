@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account activation email</title>
+</head>
+<body>
+HI {{user.user_name}}
+your account has been created
+
+http://{{ domain }}{% url 'account:activate' uidb64=uid token=token%}
+
+
+</body>
+</html>
