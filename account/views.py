@@ -6,8 +6,9 @@ from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.contrib import messages
 
-from .forms import RegistrationForm
+from .forms import RegistrationForm, UserEditForm
 from .models import BaseUser
 from .token import account_activation_token
 
@@ -17,6 +18,19 @@ def dashboard(request):
     return render(request,
                   'account/user/dashboard.html', )
 
+@login_required
+def edit_details(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+
+        if user_form.is_valid():
+            user_form.save()
+    else:
+        user_form = UserEditForm(instance=request.user)
+
+    return render(request,
+                  'account/user/edit_details.html', {'user_form': user_form})
+
 
 @login_required
 def delete_user(request):
@@ -24,10 +38,12 @@ def delete_user(request):
     user.is_active = False
     user.save()
     logout(request)
-    return redirect('account:delete_confirmation')
+    return redirect('account:delete_confirm')
+
 
 
 def account_register(request):
+
     if request.user.is_authenticated:
         return redirect('account:dashboard')
 
@@ -37,7 +53,7 @@ def account_register(request):
             user = registerForm.save(commit=False)
             user.email = registerForm.cleaned_data['email']
             user.set_password(registerForm.cleaned_data['password'])
-            user.is_active = False
+            user.is_active = True
             user.save()
             current_site = get_current_site(request)
             subject = 'Activate your Account'
@@ -48,7 +64,7 @@ def account_register(request):
                 'token': account_activation_token.make_token(user),
             })
             user.email_user(subject=subject, message=message)
-            return HttpResponse('registered succesfully and activation sent')
+            return HttpResponse('All OK')
     else:
         registerForm = RegistrationForm()
     return render(request, 'account/registration/register.html', {'form': registerForm})
@@ -67,3 +83,5 @@ def account_activate(request, uidb64, token):
         return redirect('account:dashboard')
     else:
         return render(request, 'account/registration/activation_invalid.html')
+
+
