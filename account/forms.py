@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
 
 from .models import BaseUser
 
@@ -15,13 +15,18 @@ class RegistrationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['user_name'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'Username'})
+            {'class': 'form-control mb-3',
+             'placeholder': 'Username'})
         self.fields['email'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'E-mail', 'name': 'email', 'id': 'id_email'})
+            {'class': 'form-control mb-3',
+             'placeholder': 'E-mail', 'name':
+                 'email', 'id': 'id_email'})
         self.fields['password'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'Password'})
+            {'class': 'form-control mb-3',
+             'placeholder': 'Password'})
         self.fields['password2'].widget.attrs.update(
-            {'class': 'form-control', 'placeholder': 'Repeat Password'})
+            {'class': 'form-control',
+             'placeholder': 'Repeat Password'})
 
     class Meta:
         model = BaseUser
@@ -48,9 +53,10 @@ class RegistrationForm(forms.ModelForm):
 
 
 class UserLoginForm(AuthenticationForm):
-
     username = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'form-control mb-3', 'placeholder': 'Username', 'id': 'login-username'}))
+        attrs={'class': 'form-control mb-3',
+               'placeholder': 'Username',
+               'id': 'login-username'}))
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={
             'class': 'form-control',
@@ -59,15 +65,20 @@ class UserLoginForm(AuthenticationForm):
         }
     ))
 
-class UserEditForm(forms.ModelForm):
 
+class UserEditForm(forms.ModelForm):
     email = forms.EmailField(
         label='Account email (can not be changed)', max_length=200, widget=forms.TextInput(
-            attrs={'class': 'form-control mb-3', 'placeholder': 'email', 'id': 'form-email', 'readonly': 'readonly'}))
+            attrs={'class': 'form-control mb-3',
+                   'placeholder': 'email',
+                   'id': 'form-email',
+                   'readonly': 'readonly'}))
 
     first_name = forms.CharField(
         label='Username', min_length=4, max_length=50, widget=forms.TextInput(
-            attrs={'class': 'form-control mb-3', 'placeholder': 'Firstname', 'id': 'form-lastname'}))
+            attrs={'class': 'form-control mb-3',
+                   'placeholder': 'Firstname',
+                   'id': 'form-lastname'}))
 
     class Meta:
         model = BaseUser
@@ -77,3 +88,26 @@ class UserEditForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['first_name'].required = True
         self.fields['email'].required = True
+
+
+class PwdResetForm(PasswordResetForm):
+    email = forms.EmailField(max_length=254, widget=forms.TextInput(
+        attrs={'class': 'form-control mb-3', 'placeholder': 'Email', 'id': 'form-email'}))
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        u = BaseUser.objects.filter(email=email)
+        if not u:
+            raise forms.ValidationError('We not have that email')
+        return email
+
+
+class PwdResetConfirmForm(SetPasswordForm):
+    new_password1 = forms.CharField(max_length=120, label='New password',
+                                    widget=forms.PasswordInput(attrs={'class': 'form-control mb-3',
+                                                                      'placeholder': 'New password',
+                                                                      'id': 'form-newpass'}))
+    new_password2 = forms.CharField(max_length=120, label='New password',
+                                    widget=forms.PasswordInput(attrs={'class': 'form-control mb-3',
+                                                                      'placeholder': 'New password',
+                                                                      'id': 'form-newpass2'}))
