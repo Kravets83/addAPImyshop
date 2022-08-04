@@ -1,0 +1,5 @@
+payment:
+        enter secret key in 2 files: static/payment/index.js
+                                     payment/views.py + uncomment pay system
+
+        uncomment payment form in templates/payment/home.html
