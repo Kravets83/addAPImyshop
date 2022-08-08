@@ -3,7 +3,7 @@
 <main class="pt-5">
   <div class="container" style="max-width: 1000px">
     <div class="col-12">
-      <h1 class="h2">Your Dashboard</h1>
+      <h1 class="h2">{{ user.user_name }} Dashboard</h1>
     </div>
     <div class="col-12 d-flex justify-content-between">
       <div>Manage your <b>orders</b> and personal details</div>
@@ -31,7 +31,7 @@
             <li class="item small">{{order.full_name}}</li>
             <li class="item small">{{order.address1}}</li>
             <li class="item small">{{order.address2}}</li>
-            <li class="item small">{{order.post_code}}</li>
+            <li class="item small">{{order.postcode}}</li>
           </ul>
           </div>
 
@@ -61,11 +61,13 @@
               <div class="card-body p-1">
                 <a class="text-decoration-none" href="{{ item.product.get_absolute_url }}">
                   <p class="card-text small">{{item.product.model}}</p>
+
+
                 </a>
               </div>
             </div>
           </div>
-        </div>
+        </div><hr>
 
 
         {% endfor %}

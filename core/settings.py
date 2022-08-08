@@ -67,7 +67,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
-
+#
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -77,6 +77,19 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+#
+# DATABASE = "myshop"
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 1111,
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

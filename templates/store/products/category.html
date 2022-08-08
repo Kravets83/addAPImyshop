@@ -13,9 +13,10 @@
 
       <div class="pb-3 h5">{{category.name|title}}</div>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-
-        {% for product in products %}
-
+        {% if not products %}
+      <div class="col-12">There are currently no products active <a href="{% url 'store:store_home' %}">Home</a></div>
+         {% else %}
+            {% for product in products %}
         <div class="col">
           <div class="card shadow-sm">
           <img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}">
@@ -35,7 +36,7 @@
         </div>
 
         {% endfor %}
-
+        {%endif%}
       </div>
     </div>
   </div>
