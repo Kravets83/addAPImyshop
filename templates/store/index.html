@@ -9,12 +9,15 @@
         <div class="album py-5">
           <div class="pb-3">
             <h1 class="h2"><center>Popular</center></h1>
+              <center>page N {{page.number}}</center>
           </div>
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+
               {% if not products %}
                 <div class="col-12">There are currently no products active</div>
                   {% else %}
-                    {% for product in products %}
+                    {% for product in page.object_list %}
+
                     <div class="col">
                       <div class="card border-0">
                           <a class="fw-bold"
@@ -32,8 +35,23 @@
                       </div>
                     </div>
                     {% endfor %}
-                </div>
+                    </div>
                  {% endif %}
+             <div class="page-links">
+        {% if page.has_previous %}
+        <a href="/?page={{ page.previous_page_number }}"style="color:Silver"><</a>
+        {% endif %}
+         {% for p in page.paginator.page_range %}
+                    {% if page.number == p %}
+                        <a color: red href="?page={{ p }}"style="color:red">{{ p }} <span class="sr-only"></span></a>
+                    {% elif p > page.number|add:-3 and p < page.number|add:3 %}
+                        <a  href="?page={{ p }}"style="color:Silver">{{ p }}</a>
+                    {% endif %}
+                    {% endfor %}
+        {% if page.has_next %}
+        <a href="/?page={{ page.next_page_number }}"style="color:Silver">></a>
+        {% endif %}
+    </div>
         </div>
       </div>
     </div>
