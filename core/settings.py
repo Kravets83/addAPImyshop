@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-4087d@3vg@92isk-5xblxwpq^1ha_w#(i2ynt2%acv_k#7aer6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'store',
     'basket',
     'account',
-    'payment'
+    'payment',
+    'orders'
 ]
 
 MIDDLEWARE = [
@@ -111,9 +112,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
+
+BASKET_SESSION_ID = 'basket'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
@@ -130,3 +135,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+STRIPE_ENDPOINT_SECRET='whsec_254125f6d60472fbc532cb53c77239f73badfdf72f431d99c47e69bd0397b354'
+
+PUBLISHABLE_KEY='pk_test_51LSfAyEUuqqYXUUbm5WDQHGghMFbBewW21JU0EuwpFktvrhAy0S6D9snbBSxRPYjOYc5vgoNcBt0vManK2qLLcRb00s2tDjAkG'
+SECRET_KEY_PAY='sk_test_51LSfAyEUuqqYXUUbzAs2lIk7fgb8ypK70HgBVmcX6ymKwlzIBfKY4bn8jboGiyjVnCpxEiqjG6dqES2oZh683U3u00DSHg1uNM'
