@@ -153,6 +153,22 @@
     </header>
 
     <div id="content">{% block content %} {% endblock %}</div>
+    <center><div class="page-links" >
+<!--        {% if page.has_previous %}-->
+<!--        <a href="/?page={{ page.previous_page_number }}"style="color:Silver"><</a>-->
+<!--        {% endif %}-->
+         {% for p in page.paginator.page_range %}
+                    {% if page.number == p %}
+                        <a href="?page={{ p }}"style="color:red; font-size: 150%" >{{ p }} <span class="sr-only"></span></a>
+                    {% elif p > page.number|add:-3 and p < page.number|add:3 %}
+                        <a  href="?page={{ p }}"style="color:Silver">{{ p }}</a>
+                    {% endif %}
+                    {% endfor %}
+<!--        {% if page.has_next %}-->
+<!--        <a href="/?page={{ page.next_page_number }}"style="color:Silver">></a>-->
+<!--        {% endif %}-->
+    </div></center>
+
 
     <footer class="container py-5 footer">
         <hr>

@@ -11,23 +11,25 @@
   <div class="album py-5 bg-light">
     <div class="container">
 
-      <div class="pb-3 h5">{{category.name|title}}</div>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+        <center><div class="pb-3 h5">{{category.name|title}}</div></center>
+
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
         {% if not products %}
       <div class="col-12">There are currently no products active <a href="{% url 'store:store_home' %}">Home</a></div>
          {% else %}
-            {% for product in products %}
+            {% for product in page.object_list %}
         <div class="col">
           <div class="card shadow-sm">
-          <img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}">
-
+              <a class="fw-bold"
+                              href="{{ product.get_absolute_url }}"><center>{{ product.manufacturer }}</center></a>
+           <center><a class="fw-bold"
+                      href="{{ product.get_absolute_url }}"><img class="slider-image" height="168" src="{{ product.image.url }}"></a></center>
             <div class="card-body">
               <p class="card-text" align="center">
-                <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.model }}</a>
-              </p>
+                <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.model }}</a></p>
               <p class="card-text" align="center">
-                <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.price }}$</a>
-              </p>
+                <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.price }}$</a></p>
               <div class="d-flex justify-content-between align-items-center">
                 <small class="text-muted"></small>
               </div>
@@ -37,11 +39,10 @@
 
         {% endfor %}
         {%endif%}
+
       </div>
     </div>
   </div>
-
-
 </main>
 
 {% endblock %}

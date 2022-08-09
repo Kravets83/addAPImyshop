@@ -9,7 +9,7 @@
         <div class="album py-5">
           <div class="pb-3">
             <h1 class="h2"><center>Popular</center></h1>
-              <center>page N {{page.number}}</center>
+
           </div>
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
 
@@ -19,11 +19,11 @@
                     {% for product in page.object_list %}
 
                     <div class="col">
-                      <div class="card border-0">
+                      <div class="card border-1" >
                           <a class="fw-bold"
                               href="{{ product.get_absolute_url }}"><center>{{ product.manufacturer }}</center></a>
-                          <a class="fw-bold"
-                             href="{{ product.get_absolute_url }}"><img class="img-fluid" width:auto alt="Responsive image" src="{{ product.image.url }}"></a>
+                          <center> <a class="fw-bold"
+                            href="{{ product.get_absolute_url }}"><img class="slider-image" height="168" src="{{ product.image.url }}"></a></center>
 
                         <div class="card-body px-0">
                           <p class="card-text">
@@ -37,21 +37,6 @@
                     {% endfor %}
                     </div>
                  {% endif %}
-             <div class="page-links">
-        {% if page.has_previous %}
-        <a href="/?page={{ page.previous_page_number }}"style="color:Silver"><</a>
-        {% endif %}
-         {% for p in page.paginator.page_range %}
-                    {% if page.number == p %}
-                        <a color: red href="?page={{ p }}"style="color:red">{{ p }} <span class="sr-only"></span></a>
-                    {% elif p > page.number|add:-3 and p < page.number|add:3 %}
-                        <a  href="?page={{ p }}"style="color:Silver">{{ p }}</a>
-                    {% endif %}
-                    {% endfor %}
-        {% if page.has_next %}
-        <a href="/?page={{ page.next_page_number }}"style="color:Silver">></a>
-        {% endif %}
-    </div>
         </div>
       </div>
     </div>

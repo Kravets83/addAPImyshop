@@ -37,16 +37,10 @@
           <a role="button" href="{% url "payment:basket" %}" class="btn btn-success fw-bold" type="button">Checkout</a>
           <button class="btn btn-light" type="button">Save for later</button>
         </div>
-        <div class="text-end">
-
-
-
-        </div>
-      </div>
-      <div class="col-md-5 col-lg-4 order-md-last p-0 order-3">
 
       </div>
-      <div class="col-md-7 col-lg-8 p-0">
+
+      <div class="col-md-3  col-lg-12 p-1" >
     {% for item in basket %}
     {% with product=item.product %}
     <div data-index="{{product.id}}" class="row mb-4 border product-item">

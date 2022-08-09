@@ -142,6 +142,8 @@ AUTH_USER_MODEL = 'account.BaseUser'
 LOGIN_REDIRECT_URL = '/account/dashboard'
 LOGIN_URL = '/account/login/'
 
+NUM_PAGINATION = 4
+
 PASSWORD_RESET_TIMEOUT_DAYS = 100
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
