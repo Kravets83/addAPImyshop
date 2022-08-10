@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 
 from core.settings import NUM_PAGINATION
 from .models import Product, Category
+from django.db.models import Q
 
 
 def categories(request):
@@ -17,7 +18,15 @@ def products(request):
 
 
 def product_all(request):
-    products = Product.products.all()
+    search_query = request.GET.get("search", "")
+
+    if search_query:
+        products = Product.objects.filter(Q(model__icontains=search_query)
+                                          | Q(manufacturer__icontains=search_query)
+                                          | Q(description__icontains=search_query))
+        print(products)
+    else:
+        products = Product.products.all()
     products_paginator = Paginator(products, NUM_PAGINATION)
     page_num = request.GET.get('page')
 
@@ -53,6 +62,14 @@ def category_list(request, category_slug=None):
 
     }
     return render(request, 'store/products/category.html', comtext)#{'category': category, 'products': products})
+
+
+#
+# def search(request):
+#     search_query = request.GET.get("search","")
+#     if search_query:
+#         products_search = Product.objects.filter(model__icontains=search_query)
+#     print(products_search)
 
 
 
