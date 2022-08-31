@@ -10,19 +10,18 @@ class ProductListSerializer(serializers.ModelSerializer):
         model = Product
         fields = ('id', 'model', 'manufacturer', 'price', 'category')
 
-
 class ProductDetailSerializer(serializers.ModelSerializer):
     # category = serializers.SlugRelatedField('name', read_only=True)
     created_by = serializers.SlugRelatedField('email', read_only=True)
 
     class Meta:
         model = Product
-        fields = ('model', 'manufacturer', 'price', 'slug','created_by', 'description')
+        fields = ('id','model', 'manufacturer', 'price', 'slug','created_by', 'description', 'category')
 
 
-
-
-class ListCategorySerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'slug')
+
+
