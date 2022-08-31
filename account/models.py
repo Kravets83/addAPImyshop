@@ -43,7 +43,7 @@ class BaseUser(AbstractBaseUser, PermissionsMixin):
     user_name = models.CharField(max_length=150, unique=True)
     first_name = models.CharField(max_length=150, blank=True)
     about = models.TextField(gl('about'), max_length=500, blank=True)
-    country = CountryField()
+    # country = CountryField()
     phone_number = models.TextField(max_length=15, blank=True)
     postcode = models.CharField(max_length=150, blank=True)
     address_line1 = models.CharField(max_length=150, blank=True)

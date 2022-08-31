@@ -6,6 +6,8 @@ from .models import Product, Category
 from django.db.models import Q
 
 
+
+
 def categories(request):
     return {'categories': Category.objects.all()}
 

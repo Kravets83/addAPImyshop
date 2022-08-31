@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from . import views
+from . import views, viewsAPI
 
 app_name = 'store'
 
@@ -12,3 +12,4 @@ urlpatterns = [
     path('shop/<slug:category_slug>/', views.category_list, name='category_list'),
 
 ]
+

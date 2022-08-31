@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+import ckeditor_uploader
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # import store.context_processors
 import django.core.mail.backends.console
@@ -27,6 +28,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    # 'ckeditor',
+    # 'ckeditor_uploader',
     'store',
     'basket',
     'account',

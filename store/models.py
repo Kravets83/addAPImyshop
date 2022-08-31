@@ -1,7 +1,6 @@
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
-from django.conf import settings
-
 
 
 class ProductManager(models.Manager):
@@ -24,14 +23,14 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE, default=1)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, db_constraint=models.CASCADE, related_name='product_creator',
-                                   on_delete=models.CASCADE)
+                                   on_delete=models.CASCADE, default=1)
     model = models.CharField(max_length=225)
     manufacturer = models.CharField(max_length=225, default='')
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='images/%Y/%m/%d/', default='images/default-image.jpg')
-    slug = models.SlugField(max_length=225)
+    slug = models.SlugField(max_length=225,unique=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
     in_stock = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
