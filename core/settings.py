@@ -1,10 +1,8 @@
 import os
 from pathlib import Path
 
-import ckeditor_uploader
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # import store.context_processors
-import django.core.mail.backends.console
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -129,8 +127,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
@@ -154,15 +150,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-STRIPE_ENDPOINT_SECRET='whsec_254125f6d60472fbc532cb53c77239f73badfdf72f431d99c47e69bd0397b354'
+STRIPE_ENDPOINT_SECRET = 'whsec_254125f6d60472fbc532cb53c77239f73badfdf72f431d99c47e69bd0397b354'
 
-PUBLISHABLE_KEY='pk_test_51LSfAyEUuqqYXUUbm5WDQHGghMFbBewW21JU0EuwpFktvrhAy0S6D9snbBSxRPYjOYc5vgoNcBt0vManK2qLLcRb00s2tDjAkG'
-SECRET_KEY_PAY='sk_test_51LSfAyEUuqqYXUUbzAs2lIk7fgb8ypK70HgBVmcX6ymKwlzIBfKY4bn8jboGiyjVnCpxEiqjG6dqES2oZh683U3u00DSHg1uNM'
-
-
-# DEFAULT_AUTHENTICATION_CLASSES: (
-#     'rest_framework.authentication.SessionAuthentication',
-#     'rest_framework.authentication.BasicAuthentication')
+PUBLISHABLE_KEY = 'pk_test_51LSfAyEUuqqYXUUbm5WDQHGghMFbBewW21JU0EuwpFktvrhAy0S6D9snbBSxRPYjOYc5vgoNcBt0vManK2qLLcRb00s2tDjAkG'
+SECRET_KEY_PAY = 'sk_test_51LSfAyEUuqqYXUUbzAs2lIk7fgb8ypK70HgBVmcX6ymKwlzIBfKY4bn8jboGiyjVnCpxEiqjG6dqES2oZh683U3u00DSHg1uNM'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
