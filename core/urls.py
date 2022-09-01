@@ -38,6 +38,7 @@ urlpatterns = [
     # '''api'''
     path('api-auth/', include('rest_framework.urls')),
     path('api/v1/', include('store.urlsAPI')),
+    path('api/v1/', include('account.urlsAPI')),
 
 
 
