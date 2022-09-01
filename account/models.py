@@ -36,8 +36,8 @@ class CustomAccountManager(BaseUserManager):
         return user
 
 class BaseUser(AbstractBaseUser, PermissionsMixin):
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['user_name']
+    USERNAME_FIELD = 'user_name'
+    # REQUIRED_FIELDS = ['user_name']
 
     email = models.EmailField(gl('email address'), unique=True)
     user_name = models.CharField(max_length=150, unique=True)

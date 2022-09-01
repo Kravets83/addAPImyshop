@@ -1,12 +1,14 @@
 '''API'''
+from django.contrib.auth import login
 from django.http import JsonResponse, HttpResponse
 from rest_framework import status
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import permissions
 
 from .models import BaseUser
-from .serializer import UsersListSerializer, UserSerializer
+from .serializer import UsersListSerializer, UserSerializer, LoginSerializer
 
 
 class UsersList(APIView):
@@ -51,3 +53,16 @@ class UserDetail(APIView):
             serializer.save()
             return JsonResponse(serializer.data)
         return JsonResponse(serializer.errors, status=400)
+
+
+class LoginView(APIView):
+    # This view should be accessible also for unauthenticated users.
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format=None):
+        serializer = LoginSerializer(data=self.request.data,
+            context={ 'request': self.request })
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        login(request, user)
+        return Response(None, status=status.HTTP_202_ACCEPTED)
